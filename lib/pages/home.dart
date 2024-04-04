@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lietweit/widgets/button_icon.dart';
+import 'package:lietweit/widgets/card_workout.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -12,6 +13,7 @@ class HomePage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 28.0, vertical: 32.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [
@@ -23,9 +25,17 @@ class HomePage extends StatelessWidget {
                       overflow: TextOverflow.visible,
                     ),
                   ),
-                  const ButtonIcon(icon: Icons.stacked_line_chart_rounded)
+                  const SizedBox(width: 16),
+                  const ButtonIcon(Icons.stacked_line_chart_rounded),
                 ],
               ),
+              const SizedBox(height: 32),
+              Text(
+                'Your Workouts',
+                style: Theme.of(context).textTheme.headlineSmall,
+              ),
+              const SizedBox(height: 16),
+              const CardWorkout(),
             ],
           ),
         ),

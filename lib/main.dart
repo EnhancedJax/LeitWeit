@@ -59,7 +59,18 @@ class MyApp extends StatelessWidget {
                 fontSize: 24.0,
                 color: AppTheme.onBackground,
                 fontWeight: FontWeight.bold),
-            bodyMedium: TextStyle(fontSize: 16.0, color: AppTheme.onBackground),
+            headlineMedium: TextStyle(
+                fontSize: 20.0,
+                color: AppTheme.onBackground,
+                fontWeight: FontWeight.w600),
+            headlineSmall: TextStyle(
+                fontSize: 16,
+                color: AppTheme.onBackground2,
+                fontWeight: FontWeight.w400),
+            bodyMedium: TextStyle(
+                fontSize: 16,
+                color: AppTheme.onBackground,
+                fontWeight: FontWeight.w300),
           ),
         ),
         home: const HomePage(),
