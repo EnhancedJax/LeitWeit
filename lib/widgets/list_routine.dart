@@ -1,7 +1,5 @@
-import 'dart:math';
-
+import 'package:LeitWeit/main.dart';
 import 'package:flutter/material.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class Routine {
   String name;
@@ -17,7 +15,7 @@ class ListRoutine extends StatefulWidget {
 }
 
 class ListRoutineState extends State<ListRoutine> {
-  final _future = Supabase.instance.client.from('Routines').select('*');
+  final _future = supabase.from('Routines').select('*');
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +33,18 @@ class ListRoutineState extends State<ListRoutine> {
             }
             return Expanded(
               child: SizedBox(
-                height: 200,
+                height: 120,
                 child: ListView.builder(
                   itemCount: routines.length,
+                  scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
                     final routine = routines[index];
-                    return Text(routine['name']);
+                    return Card(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(routine['name']),
+                      ),
+                    );
                   },
                 ),
               ),

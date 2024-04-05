@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:LeitWeit/widgets/button_icon.dart';
 import 'package:LeitWeit/widgets/list_routine.dart';
+import 'package:LeitWeit/pages/auth/login.dart';
+import 'package:go_router/go_router.dart';
+import 'package:LeitWeit/main.dart';
 
 class HomePage extends StatelessWidget {
+  static const route = '/';
+
   const HomePage({super.key});
 
   @override
@@ -30,12 +35,39 @@ class HomePage extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 32),
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: AppTheme.secondarySurface,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text('M'),
+                    Text('T'),
+                    Text('W'),
+                    Text('T'),
+                    Text('F'),
+                    Text('S'),
+                    Text('S'),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 32),
               Text(
                 'Your Workouts',
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
               const SizedBox(height: 16),
-              const ListRoutine(),
+              ListRoutine(),
+              ElevatedButton(
+                onPressed: () {
+                  supabase.auth.signOut();
+                  context.go(LoginPage.route);
+                },
+                child: Text('Sign Out'),
+              ),
             ],
           ),
         ),

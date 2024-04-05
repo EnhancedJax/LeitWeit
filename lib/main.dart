@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:LeitWeit/pages/home.dart';
+import 'package:LeitWeit/pages/auth/login.dart';
+import 'package:go_router/go_router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 Future<void> main() async {
@@ -13,6 +15,8 @@ Future<void> main() async {
   runApp(const MyApp());
 }
 
+final supabase = Supabase.instance.client;
+
 class AppTheme {
   static const Color background = Color(0xFF232323);
   static const Color onBackground = Color(0xFFEDEDED);
@@ -22,7 +26,7 @@ class AppTheme {
   static const Color onSurface = Color(0xFFEDEDED);
   static const Color onSurface2 = Color(0xFF707070);
   static const Color border = Color(0xFF343434);
-  static const Color shadow = Color(0xFF000000);
+  static const Color shadow = Colors.transparent;
   static const Color green = Color(0xFF34D399);
   static const Color red = Color(0xFFFF5A5A);
   static const Color aqua = Color(0xFF35CFFF);
@@ -56,12 +60,23 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppThemeData(
       theme: AppTheme(),
-      child: MaterialApp(
+      child: MaterialApp.router(
         title: 'My App',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           scaffoldBackgroundColor: AppTheme.background,
           fontFamily: 'Inter',
+          cardTheme: const CardTheme(
+            color: AppTheme.secondarySurface,
+            shadowColor: AppTheme.shadow,
+            surfaceTintColor: Colors.transparent,
+            elevation: 4,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(AppTheme.borderRadius),
+              ),
+            ),
+          ),
           textTheme: const TextTheme(
             headlineLarge: TextStyle(
                 fontSize: 24.0,
@@ -81,8 +96,31 @@ class MyApp extends StatelessWidget {
                 fontWeight: FontWeight.w300),
           ),
         ),
-        home: const HomePage(),
+        routerConfig: _router,
       ),
     );
   }
 }
+
+final _router = GoRouter(
+  routes: [
+    GoRoute(
+      path: HomePage.route,
+      builder: (context, state) => const HomePage(),
+    ),
+    GoRoute(
+      path: LoginPage.route,
+      builder: (context, state) => const LoginPage(),
+    ),
+  ],
+  redirect: (context, state) async {
+    final session = supabase.auth.currentSession;
+    // A user without a session should be redirected to the register page
+    if (session == null) {
+      return LoginPage.route;
+    }
+
+    // The user has signed, and is allowed to view any page.
+    return null;
+  },
+);
