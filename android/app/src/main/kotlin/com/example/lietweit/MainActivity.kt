@@ -1,4 +1,4 @@
-package com.example.lietweit
+package com.example.LeitWeit
 
 import io.flutter.embedding.android.FlutterActivity
 

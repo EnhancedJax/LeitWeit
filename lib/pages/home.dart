@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lietweit/widgets/button_icon.dart';
-import 'package:lietweit/widgets/card_workout.dart';
+import 'package:LeitWeit/widgets/button_icon.dart';
+import 'package:LeitWeit/widgets/list_routine.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -35,7 +35,7 @@ class HomePage extends StatelessWidget {
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
               const SizedBox(height: 16),
-              const CardWorkout(),
+              const ListRoutine(),
             ],
           ),
         ),

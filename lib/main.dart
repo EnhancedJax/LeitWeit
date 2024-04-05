@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lietweit/pages/home.dart';
+import 'package:LeitWeit/pages/home.dart';
 
 void main() {
   runApp(const MyApp());

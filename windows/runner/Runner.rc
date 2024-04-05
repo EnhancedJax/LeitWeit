@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "lietweit" "\0"
+            VALUE "FileDescription", "LeitWeit" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "lietweit" "\0"
+            VALUE "InternalName", "LeitWeit" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2024 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "lietweit.exe" "\0"
-            VALUE "ProductName", "lietweit" "\0"
+            VALUE "OriginalFilename", "LeitWeit.exe" "\0"
+            VALUE "ProductName", "LeitWeit" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lietweit/main.dart';
-import 'package:lietweit/widgets/frame_secondary.dart';
+import 'package:LeitWeit/main.dart';
+import 'package:LeitWeit/widgets/frame_secondary.dart';
 
 class ButtonIcon extends StatelessWidget {
   final IconData icon;

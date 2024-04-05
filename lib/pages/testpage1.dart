@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lietweit/pages/testpage2.dart';
+import 'package:LeitWeit/pages/testpage2.dart';
 
 class TestPage1 extends StatelessWidget {
   const TestPage1({super.key});
