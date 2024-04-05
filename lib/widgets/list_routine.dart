@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// import 'package:supabase_flutter/supabase_flutter.dart';
 
 class Routine {
   String name;
@@ -9,42 +10,34 @@ class Routine {
 
 class ListRoutine extends StatefulWidget {
   const ListRoutine({super.key});
-
   @override
   State<ListRoutine> createState() => ListRoutineState();
 }
 
 class ListRoutineState extends State<ListRoutine> {
-  List<Routine> routines = [];
-
-  void addRoutine(Routine routine) {
-    setState(() {
-      routines.add(routine);
-    });
-  }
-
-  void editRoutine(int index, Routine newRoutine) {
-    setState(() {
-      routines[index] = newRoutine;
-    });
-  }
-
-  void deleteRoutine(int index) {
-    setState(() {
-      routines.removeAt(index);
-    });
-  }
+  // final _future = Supabase.instance.client.from('Routines').select('*');
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: routines.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          title: Text(routines[index].name),
-          // Add more properties as needed
+    return Scaffold(
+        // body: FutureBuilder(
+        //   future: _future,
+        //   builder: (context, snapshot) {
+        //     if (!snapshot.hasData) {
+        //       return const Center(child: CircularProgressIndicator());
+        //     }
+        //     final routines = snapshot.data!;
+        //     return ListView.builder(
+        //       itemCount: routines.length,
+        //       itemBuilder: ((context, index) {
+        //         final routine = routines[index];
+        //         return ListTile(
+        //           title: Text(routine['name']),
+        //         );
+        //       }),
+        //     );
+        //   },
+        // ),
         );
-      },
-    );
   }
 }

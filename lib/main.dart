@@ -1,7 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:LeitWeit/pages/home.dart';
+// import 'package:supabase_flutter/supabase_flutter.dart';
 
-void main() {
+// Future<void> main() async {
+//   WidgetsFlutterBinding.ensureInitialized();
+
+//   await Supabase.initialize(
+//     url: 'https://gpvzjolzvecywsfoajxu.supabase.co',
+//     anonKey:
+//         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdwdnpqb2x6dmVjeXdzZm9hanh1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTIyODgwNjEsImV4cCI6MjAyNzg2NDA2MX0.sDRTxW2rWk7ZRao22rnLar72-Xs7AP6AcKFUOYT_whA',
+//   );
+//   runApp(const MyApp());
+// }
+
+main() {
   runApp(const MyApp());
 }
 
