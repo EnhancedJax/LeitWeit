@@ -1,5 +1,7 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-// import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class Routine {
   String name;
@@ -15,29 +17,37 @@ class ListRoutine extends StatefulWidget {
 }
 
 class ListRoutineState extends State<ListRoutine> {
-  // final _future = Supabase.instance.client.from('Routines').select('*');
+  final _future = Supabase.instance.client.from('Routines').select('*');
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        // body: FutureBuilder(
-        //   future: _future,
-        //   builder: (context, snapshot) {
-        //     if (!snapshot.hasData) {
-        //       return const Center(child: CircularProgressIndicator());
-        //     }
-        //     final routines = snapshot.data!;
-        //     return ListView.builder(
-        //       itemCount: routines.length,
-        //       itemBuilder: ((context, index) {
-        //         final routine = routines[index];
-        //         return ListTile(
-        //           title: Text(routine['name']),
-        //         );
-        //       }),
-        //     );
-        //   },
-        // ),
-        );
+    return Row(
+      children: [
+        FutureBuilder(
+          future: _future,
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            final routines = snapshot.data!;
+            if (routines.isEmpty) {
+              return const Center(child: Text('No routines found'));
+            }
+            return Expanded(
+              child: SizedBox(
+                height: 200,
+                child: ListView.builder(
+                  itemCount: routines.length,
+                  itemBuilder: (context, index) {
+                    final routine = routines[index];
+                    return Text(routine['name']);
+                  },
+                ),
+              ),
+            );
+          },
+        ),
+      ],
+    );
   }
 }
