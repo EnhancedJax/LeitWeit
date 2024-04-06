@@ -3,7 +3,8 @@ import 'package:LeitWeit/widgets/button_icon.dart';
 import 'package:LeitWeit/widgets/list_routine.dart';
 import 'package:LeitWeit/pages/auth/login.dart';
 import 'package:go_router/go_router.dart';
-import 'package:LeitWeit/main.dart';
+import 'package:LeitWeit/services/supabase.dart';
+import 'package:LeitWeit/themedata.dart';
 
 class HomePage extends StatelessWidget {
   static const route = '/';
