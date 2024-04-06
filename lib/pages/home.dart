@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:LeitWeit/widgets/button_icon.dart';
 import 'package:LeitWeit/widgets/list_routine.dart';
 import 'package:LeitWeit/pages/auth/login.dart';
+import 'package:LeitWeit/pages/newroutine.dart';
 import 'package:go_router/go_router.dart';
 import 'package:LeitWeit/services/supabase.dart';
 import 'package:LeitWeit/themedata.dart';
@@ -31,8 +31,6 @@ class HomePage extends StatelessWidget {
                       overflow: TextOverflow.visible,
                     ),
                   ),
-                  const SizedBox(width: 16),
-                  const ButtonIcon(Icons.stacked_line_chart_rounded),
                 ],
               ),
               const SizedBox(height: 32),
@@ -57,17 +55,40 @@ class HomePage extends StatelessWidget {
               ),
               const SizedBox(height: 32),
               Text(
-                'Your Workouts',
+                'Your Routines',
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
               const SizedBox(height: 16),
-              ListRoutine(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      child: const Text('New workout'),
+                      onPressed: () {
+                        context.go('/add-routine');
+                      },
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: ElevatedButton(
+                      child: const Text('New Routine'),
+                      onPressed: () {
+                        context.push(NewRoutinePage.route);
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              const ListRoutine(),
               ElevatedButton(
                 onPressed: () {
                   supabase.auth.signOut();
                   context.go(LoginPage.route);
                 },
-                child: Text('Sign Out'),
+                child: const Text('Sign Out'),
               ),
             ],
           ),

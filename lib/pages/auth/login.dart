@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:LeitWeit/main.dart';
+import 'package:LeitWeit/services/supabase.dart';
 import 'package:LeitWeit/pages/home.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 

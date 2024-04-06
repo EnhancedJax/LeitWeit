@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:LeitWeit/main.dart';
+import 'package:LeitWeit/themedata.dart';
 
 class FrameSecondary extends StatefulWidget {
   final Widget child;

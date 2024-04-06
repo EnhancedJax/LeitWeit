@@ -1,4 +1,4 @@
-import 'package:LeitWeit/main.dart';
+import 'package:LeitWeit/services/supabase.dart';
 import 'package:flutter/material.dart';
 
 class Routine {

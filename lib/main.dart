@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:LeitWeit/pages/home.dart';
-import 'package:LeitWeit/pages/auth/login.dart';
 import 'package:go_router/go_router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+
 import 'package:flutter/services.dart';
 import 'package:LeitWeit/themedata.dart';
+import 'package:LeitWeit/pages/chooseexercise.dart';
+
+import 'package:LeitWeit/pages/home.dart';
+import 'package:LeitWeit/pages/newroutine.dart';
+import 'package:LeitWeit/pages/auth/login.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,11 +33,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-        title: 'My App',
-        debugShowCheckedModeBanner: false,
-        theme: themeData,
-        routerConfig: _router,
-        themeMode: ThemeMode.dark);
+      title: 'My App',
+      debugShowCheckedModeBanner: false,
+      theme: themeData,
+      routerConfig: _router,
+      themeMode: ThemeMode.dark,
+    );
   }
 }
 
@@ -47,6 +52,13 @@ final _router = GoRouter(
       path: LoginPage.route,
       builder: (context, state) => const LoginPage(),
     ),
+    GoRoute(
+      path: NewRoutinePage.route,
+      builder: (context, state) => NewRoutinePage(),
+    ),
+    GoRoute(
+        path: ChooseExercisePage.route,
+        builder: (context, state) => ChooseExercisePage()),
   ],
   redirect: (context, state) async {
     final session = Supabase.instance.client.auth.currentSession;
