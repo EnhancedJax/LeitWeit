@@ -3,9 +3,16 @@ import 'package:LeitWeit/pages/home.dart';
 import 'package:LeitWeit/pages/auth/login.dart';
 import 'package:go_router/go_router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:flutter/services.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent, // Set status bar color to transparent
+    statusBarIconBrightness:
+        Brightness.light, // Set status bar icons to be white
+  ));
 
   await Supabase.initialize(
     url: 'https://gpvzjolzvecywsfoajxu.supabase.co',
@@ -61,43 +68,43 @@ class MyApp extends StatelessWidget {
     return AppThemeData(
       theme: AppTheme(),
       child: MaterialApp.router(
-        title: 'My App',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          scaffoldBackgroundColor: AppTheme.background,
-          fontFamily: 'Inter',
-          cardTheme: const CardTheme(
-            color: AppTheme.secondarySurface,
-            shadowColor: AppTheme.shadow,
-            surfaceTintColor: Colors.transparent,
-            elevation: 4,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(AppTheme.borderRadius),
+          title: 'My App',
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            scaffoldBackgroundColor: AppTheme.background,
+            fontFamily: 'Inter',
+            cardTheme: const CardTheme(
+              color: AppTheme.secondarySurface,
+              shadowColor: AppTheme.shadow,
+              surfaceTintColor: Colors.transparent,
+              elevation: 4,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(AppTheme.borderRadius),
+                ),
               ),
             ),
+            textTheme: const TextTheme(
+              headlineLarge: TextStyle(
+                  fontSize: 24.0,
+                  color: AppTheme.onBackground,
+                  fontWeight: FontWeight.bold),
+              headlineMedium: TextStyle(
+                  fontSize: 20.0,
+                  color: AppTheme.onBackground,
+                  fontWeight: FontWeight.w600),
+              headlineSmall: TextStyle(
+                  fontSize: 16,
+                  color: AppTheme.onBackground2,
+                  fontWeight: FontWeight.w400),
+              bodyMedium: TextStyle(
+                  fontSize: 16,
+                  color: AppTheme.onBackground,
+                  fontWeight: FontWeight.w300),
+            ),
           ),
-          textTheme: const TextTheme(
-            headlineLarge: TextStyle(
-                fontSize: 24.0,
-                color: AppTheme.onBackground,
-                fontWeight: FontWeight.bold),
-            headlineMedium: TextStyle(
-                fontSize: 20.0,
-                color: AppTheme.onBackground,
-                fontWeight: FontWeight.w600),
-            headlineSmall: TextStyle(
-                fontSize: 16,
-                color: AppTheme.onBackground2,
-                fontWeight: FontWeight.w400),
-            bodyMedium: TextStyle(
-                fontSize: 16,
-                color: AppTheme.onBackground,
-                fontWeight: FontWeight.w300),
-          ),
-        ),
-        routerConfig: _router,
-      ),
+          routerConfig: _router,
+          themeMode: ThemeMode.dark),
     );
   }
 }

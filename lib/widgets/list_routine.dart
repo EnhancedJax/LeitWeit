@@ -15,7 +15,9 @@ class ListRoutine extends StatefulWidget {
 }
 
 class ListRoutineState extends State<ListRoutine> {
-  final _future = supabase.from('Routines').select('*');
+  final _future = supabase
+      .from('Routines')
+      .select('*, routine_exercise!inner(*, Exercises!inner(*))');
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +30,7 @@ class ListRoutineState extends State<ListRoutine> {
               return const Center(child: CircularProgressIndicator());
             }
             final routines = snapshot.data!;
+            debugPrint('routines: $routines');
             if (routines.isEmpty) {
               return const Center(child: Text('No routines found'));
             }
@@ -39,10 +42,19 @@ class ListRoutineState extends State<ListRoutine> {
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
                     final routine = routines[index];
+                    final exercises = routine['routine_exercise'];
+                    final exerciseCount = routine['routine_exercise'].length;
+
                     return Card(
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(routine['name']),
+                        child: Column(
+                          children: [
+                            Text(routine['name']),
+                            Text(exercises[0]['Exercises']['name'].toString()),
+                            Text('Exercises: $exerciseCount'),
+                          ],
+                        ),
                       ),
                     );
                   },
