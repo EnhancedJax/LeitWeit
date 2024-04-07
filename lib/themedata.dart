@@ -126,6 +126,8 @@ final ThemeData themeData = ThemeData(
         fontSize: 16,
         color: AppTheme.onBackground,
         fontWeight: FontWeight.w300),
+    bodySmall: TextStyle(
+        fontSize: 14, color: AppTheme.onSurface2, fontWeight: FontWeight.w300),
   ),
   colorScheme: ColorScheme.dark().copyWith(
     primary: AppTheme.onBackground,

@@ -20,6 +20,7 @@ class _NewRoutinePageState extends State<NewRoutinePage> {
   final PageController controller = PageController(viewportFraction: 0.9);
 
   List<Widget> pages = [];
+  String routineName = 'New Routine';
 
   void saveRoutine() async {
     List<Map<String, dynamic>> exercises = [];
@@ -31,8 +32,18 @@ class _NewRoutinePageState extends State<NewRoutinePage> {
         'sets': exercise.data['sets']
       };
     }).toList();
+
+    if (exercises.length == 0) {
+      if (context.mounted)
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Add exercises to save to your routine!')),
+        );
+      return;
+    }
+
+    routineName = (routineName == '' ? 'New Routine' : routineName);
     final response = (await supabase.from('Routines').insert([
-      {'name': 'New Routine', 'user_id': supabase.auth.currentUser!.id}
+      {'name': routineName, 'user_id': supabase.auth.currentUser!.id}
     ]).select('id'));
     final newRoutineId = response[0]['id'];
     log('newRoutineId: $newRoutineId |||  Exercises: $exercises');
@@ -46,7 +57,7 @@ class _NewRoutinePageState extends State<NewRoutinePage> {
         }).toList());
     if (context.mounted)
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Routine saved!')),
+        SnackBar(content: Text('$routineName added to your routines!')),
       );
     context.pop();
   }
@@ -89,20 +100,112 @@ class _NewRoutinePageState extends State<NewRoutinePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('New Routine'),
-          actions: [
-            IconButton(
-              onPressed: saveRoutine,
-              icon: const Icon(Icons.save),
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(56),
+          child: SafeArea(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    color: AppTheme.border,
+                    width: 1,
+                  ),
+                ),
+              ),
+              child: Row(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      if (pages.length > 0) {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text('Confirmation'),
+                              content:
+                                  Text('Are you sure you want to go back?'),
+                              actions: [
+                                TextButton(
+                                  child: Text('Cancel'),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                                TextButton(
+                                  child: Text('Yes'),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                    context.pop();
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      } else {
+                        context.pop();
+                      }
+                    },
+                    icon: const Icon(Icons.arrow_back),
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: TextFormField(
+                      initialValue: '',
+                      decoration: InputDecoration(
+                        hintText: 'New Routine',
+                        hintStyle: Theme.of(context)
+                            .appBarTheme
+                            .titleTextStyle
+                            ?.copyWith(
+                              color: AppTheme.onSurface2,
+                            ),
+                        filled: false,
+                        isDense: true,
+                      ),
+                      style: Theme.of(context).appBarTheme.titleTextStyle,
+                      onChanged: (value) {
+                        setState(() {
+                          routineName = value;
+                        });
+                      },
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: saveRoutine,
+                    icon: const Icon(Icons.save),
+                  ),
+                ],
+              ),
             ),
-          ],
+          ),
         ),
-        body: PageView(
-          scrollDirection: Axis.horizontal,
-          controller: controller,
-          children: pages,
-        ),
+        body: Stack(children: [
+          PageView(
+            scrollDirection: Axis.horizontal,
+            controller: controller,
+            children: pages,
+          ),
+          if (pages.length == 0)
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(
+                    Icons.toll,
+                    size: 64,
+                    color: AppTheme.onSurface2,
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    'Add an exercise to get started!',
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                ],
+              ),
+            ),
+        ]),
         floatingActionButton: FloatingActionButton(
           onPressed: addExercise,
           foregroundColor: AppTheme.onInverseSurface,

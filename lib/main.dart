@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:get_storage/get_storage.dart';
 
 import 'package:flutter/services.dart';
 import 'package:LeitWeit/themedata.dart';
@@ -11,6 +12,7 @@ import 'package:LeitWeit/pages/newroutine.dart';
 import 'package:LeitWeit/pages/auth/login.dart';
 
 Future<void> main() async {
+  GetStorage.init();
   WidgetsFlutterBinding.ensureInitialized();
 
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
